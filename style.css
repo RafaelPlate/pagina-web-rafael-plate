@@ -128,8 +128,8 @@
       overflow: hidden;
     }
     .hero-left {
-      display: flex; flex-direction: column; justify-content: center;
-      padding: 120px 64px 80px 64px;
+      display: flex; flex-direction: column; justify-content: flex-start;
+      padding: 148px 64px 80px 64px;
       position: relative; z-index: 2;
     }
     .hero-eyebrow {
@@ -426,30 +426,72 @@
 
     /* ── HOW IT WORKS ────────────────────────────────────── */
     #how { background: var(--cream); }
+    /* ── COMO FUNCIONA — visual redesign ────────────────── */
     .how-steps {
       display: grid; grid-template-columns: repeat(5, 1fr);
-      gap: 0; position: relative; margin-top: 64px;
+      gap: 0; position: relative; margin-top: 56px; align-items: start;
     }
-    .how-line {
-      position: absolute; top: 24px; left: 10%; right: 10%; height: 1px;
-      background: var(--border); z-index: 0;
-    }
+    .how-line { display: none; }
     .how-step {
       display: flex; flex-direction: column; align-items: center;
-      text-align: center; position: relative; z-index: 1; padding: 0 16px;
+      text-align: center; position: relative; padding: 0 8px;
+    }
+    /* arrow connector between steps */
+    .how-step:not(:last-child)::after {
+      content: '→';
+      position: absolute; top: 28px; right: -14px;
+      font-size: 18px; color: var(--sage-light); z-index: 2;
+      line-height: 1;
+    }
+    .how-step-card {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: 8px; padding: 28px 20px 24px;
+      width: 100%; transition: box-shadow .2s, border-color .2s;
+    }
+    .how-step-card:hover {
+      box-shadow: 0 8px 32px rgba(21,18,16,.08);
+      border-color: var(--sage-light);
+    }
+    .how-step-top {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 16px;
+    }
+    .how-step-icon {
+      width: 40px; height: 40px; border-radius: 10px;
+      background: var(--sage-light); color: var(--sage-dark);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
     }
     .how-step-num {
-      width: 48px; height: 48px; border-radius: 50%;
-      border: 1px solid var(--sage);
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 700;
-      color: var(--sage); background: var(--cream); margin-bottom: 24px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px; font-weight: 500; letter-spacing: .08em;
+      color: var(--muted); background: var(--cream2);
+      padding: 3px 8px; border-radius: 20px;
     }
     .how-step h4 {
       font-family: 'Playfair Display', serif;
-      font-size: 16px; font-weight: 700; color: var(--ink); margin-bottom: 8px;
+      font-size: 15px; font-weight: 700; color: var(--ink);
+      margin-bottom: 8px; text-align: left;
     }
-    .how-step p { font-size: 13px; color: var(--muted); line-height: 1.6; font-weight: 300; }
+    .how-step p {
+      font-size: 12px; color: var(--muted); line-height: 1.6;
+      font-weight: 300; text-align: left;
+    }
+    .how-step-tag {
+      margin-top: 14px; display: inline-block;
+      font-size: 10px; font-weight: 500; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--sage);
+      background: rgba(95,113,97,.08); padding: 3px 10px;
+      border-radius: 20px;
+    }
+    /* highlight first step */
+    .how-step:first-child .how-step-card {
+      border-color: var(--sage-light);
+      background: linear-gradient(135deg, var(--white) 0%, rgba(200,212,201,.15) 100%);
+    }
+    .how-step:first-child .how-step-icon {
+      background: var(--sage); color: var(--white);
+    }
 
     /* ── FAQ ─────────────────────────────────────────────── */
     #faq { background: var(--cream2); }
@@ -611,8 +653,10 @@
       .about-img-caption { right: 0; }
       .spec-grid { grid-template-columns: 1fr 1fr; }
       .pillars-grid { grid-template-columns: 1fr 1fr; }
-      .how-steps { grid-template-columns: 1fr; gap: 32px; }
+      .how-steps { grid-template-columns: 1fr; gap: 20px; }
       .how-line { display: none; }
+      .how-step::after { display: none; }
+      .how-step-card { padding: 24px 20px; }
       .footer-grid { grid-template-columns: 1fr 1fr; }
     }
     @media (max-width: 768px) {
